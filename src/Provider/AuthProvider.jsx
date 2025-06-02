@@ -12,12 +12,13 @@ import {
 } from "firebase/auth";
 import { auth } from "../Firebase/Firebase.config";
 import { AuthContext } from "./AuthContext";
+import axios from "axios";
 
 
 
 
 const AuthProvider = ({ children }) => {
-    
+
     const [user, setUser] = useState(null);
 
     const [loading, setLoading] = useState(true);
@@ -63,6 +64,23 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
+
+            if (currentUser?.email) {
+
+                const userData = { email: currentUser.email };
+
+                axios.post(`${import.meta.env.VITE_API_URL}/jwt`, userData, {
+                    withCredentials: true,
+                })
+                    .then(res => {
+                        console.log('token after jwt', res.data);
+                    })
+                    .catch(err => {
+                        console.error('JWT Error:', err);
+                    });
+            }
+
+            console.log('user in auth provider', currentUser);
         });
 
         return () => unsubscribe(); // Cleanup subscription on unmount

@@ -1,8 +1,12 @@
+import { LuBookUp } from "react-icons/lu";
+import { MdOutlinePageview } from "react-icons/md";
+import { PiBrowsersFill } from "react-icons/pi";
 import { useLoaderData } from "react-router";
 import { Link } from "react-router";
 
 const TaskDetails = () => {
-    const { title, description, category, email, name, budget, deadline } = useLoaderData();
+    const { title, description, category, email, name, budget, deadline, _id } = useLoaderData();
+    const taskId = _id;
 
     return (
         <div className="min-h-[calc(100vh-190px)] bg-[#E5E4E2] flex flex-col items-center justify-center p-4">
@@ -38,13 +42,33 @@ const TaskDetails = () => {
                 </div>
             </div>
 
-            {/* Return Home Button */}
-            <Link
-                to="/browseTasks"
-                className="bg-[#4B0082] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#5d00a6] transition duration-300"
-            >
-                Browse more tasks
-            </Link>
+            <div className="flex flex-col md:flex-row gap-4">
+
+                <Link
+                    to={`/applyTask/${taskId}`}
+                    className="bg-[#4B0082] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#5d00a6] transition duration-300 flex items-center gap-2"
+                >
+
+                    Apply
+                    <LuBookUp size={25} />
+                </Link>
+
+                <Link
+                    to="/browseTasks"
+                    className="bg-[#4B0082] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#5d00a6] transition duration-300 flex items-center gap-2"
+                >
+                    Browse more tasks
+                    <PiBrowsersFill size={25} />
+                </Link>
+
+                <Link
+                    to={`/viewApplications/${taskId}`}
+                    className="bg-[#4B0082] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#5d00a6] transition duration-300 flex items-center gap-2"
+                >
+                    View Applications
+                    <MdOutlinePageview size={25}/>
+                </Link>
+            </div>
         </div>
     );
 };

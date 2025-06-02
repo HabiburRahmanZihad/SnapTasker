@@ -29,7 +29,7 @@ const UpdateTask = () => {
             name
         };
 
-        fetch(`https://snap-tasker-server.vercel.app/task/${task._id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/task/${task._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

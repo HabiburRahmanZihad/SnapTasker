@@ -65,6 +65,13 @@ const Navbar = () => {
                     </p>
                 )}
             </NavLink>
+            <NavLink to="/myApplications">
+                {({ isActive }) => (
+                    <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                        My Applications
+                    </p>
+                )}
+            </NavLink>
         </div>
     );
 

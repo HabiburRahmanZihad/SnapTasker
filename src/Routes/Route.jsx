@@ -12,6 +12,9 @@ import UserDetails from '../Pages/UserDetails';
 import TaskDetails from '../Pages/TaskDetails';
 import Loading from '../Components/Loading';
 import UpdateTask from '../Pages/UpdateTask';
+import ApplyTask from '../Pages/ApplyTask';
+import MyApplications from '../Pages/MyApplications';
+import ViewAllApplications from '../Pages/ViewAllApplications';
 
 export const router = createBrowserRouter([
     {
@@ -32,18 +35,18 @@ export const router = createBrowserRouter([
 
             {
                 path: '/browseTasks',
-                loader: () => fetch('https://snap-tasker-server.vercel.app/task'),
+                loader: () => fetch(`${import.meta.env.VITE_API_URL}/task`),
                 element: <BrowseTask></BrowseTask>
             },
             {
                 path: '/taskDetails/:id',
-                loader: ({ params }) => fetch(`https://snap-tasker-server.vercel.app/task/${params.id}`),
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/task/${params.id}`),
                 element: <PrivateRoute><TaskDetails></TaskDetails></PrivateRoute>
             },
 
             {
                 path: '/postedTasks',
-                loader: () => fetch('https://snap-tasker-server.vercel.app/task'),
+                loader: () => fetch(`${import.meta.env.VITE_API_URL}/task`),
                 element: <PrivateRoute><PostedTask></PostedTask></PrivateRoute>
             },
 
@@ -58,7 +61,7 @@ export const router = createBrowserRouter([
 
             {
                 path: '/updatetask/:id',
-                loader: ({ params }) => fetch(`https://snap-tasker-server.vercel.app/task/${params.id}`),
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/task/${params.id}`),
                 element: <PrivateRoute><UpdateTask></UpdateTask></PrivateRoute>
             },
 
@@ -66,6 +69,23 @@ export const router = createBrowserRouter([
                 path: '/taskbids/:id',
                 element: <PrivateRoute><p>this is task bids </p></PrivateRoute>
             },
+            {
+                path: '/applyTask/:id',
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/task/${params.id}`),
+                element: <PrivateRoute><ApplyTask></ApplyTask></PrivateRoute>
+            },
+            {
+                path: '/myApplications',
+                loader: () => fetch(`${import.meta.env.VITE_API_URL}/applications`, {
+                    credentials: 'include',
+                }),
+                element: <PrivateRoute><MyApplications></MyApplications></PrivateRoute>
+            },
+            {
+                path: '/viewApplications/:id',
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/applications/task/${params.id}`),
+                element: <PrivateRoute><ViewAllApplications></ViewAllApplications></PrivateRoute>
+            }
 
         ]
     },

@@ -21,7 +21,7 @@ const PostedTask = () => {
             if (user?.email) {
                 try {
                     setLoading(true);
-                    const response = await fetch(`https://snap-tasker-server.vercel.app/bids/user/${user.email}`);
+                    const response = await fetch(`${import.meta.env.VITE_API_URL}/bids/user/${user.email}`);
                     const bids = await response.json();
 
                     // Check if we got an array of bids back
@@ -55,7 +55,7 @@ const PostedTask = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // delete task from database
-                fetch(`https://snap-tasker-server.vercel.app/task/${id}`, {
+                fetch(`${import.meta.env.VITE_API_URL}/task/${id}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json"
@@ -102,7 +102,7 @@ const PostedTask = () => {
         };
 
         // Check if this user has already bid on this task
-        fetch(`https://snap-tasker-server.vercel.app/bids/check/${user.email}/${taskId}`)
+        fetch(`${import.meta.env.VITE_API_URL}/bids/check/${user.email}/${taskId}`)
             .then(res => res.json())
             .then(data => {
                 if (data.exists) {
@@ -116,7 +116,7 @@ const PostedTask = () => {
                 }
 
                 // Save bid to database if user hasn't bid yet
-                return fetch("https://snap-tasker-server.vercel.app/bids", {
+                return fetch(`${import.meta.env.VITE_API_URL}/bids`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

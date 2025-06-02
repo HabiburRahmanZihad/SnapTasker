@@ -10,7 +10,7 @@ const FeaturedTasks = () => {
         const fetchTasks = async () => {
             try {
                 setLoading(true);
-                const response = await fetch('https://snap-tasker-server.vercel.app/recentTasks');
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/recentTasks`);
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch tasks');
