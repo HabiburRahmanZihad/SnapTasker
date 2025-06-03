@@ -72,15 +72,15 @@ const AuthProvider = ({ children }) => {
                 axios.post(`${import.meta.env.VITE_API_URL}/jwt`, userData, {
                     withCredentials: true,
                 })
-                    .then(res => {
-                        console.log('token after jwt', res.data);
+                    .then(() => {
+                        // console.log('token after jwt', res.data);
                     })
                     .catch(err => {
                         console.error('JWT Error:', err);
                     });
             }
 
-            console.log('user in auth provider', currentUser);
+            // console.log('user in auth provider', currentUser);
         });
 
         return () => unsubscribe(); // Cleanup subscription on unmount
