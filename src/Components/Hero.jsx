@@ -1,7 +1,7 @@
 const Hero = () => {
     return (
         <div className="w-full">
-            <div className="carousel w-full h-[60vh] sm:h-[70vh] ">
+            <div className="carousel w-full h-[60vh] lg:h-[70vh] ">
 
                 <div id="slide1" className="carousel-item relative w-full">
                     <img

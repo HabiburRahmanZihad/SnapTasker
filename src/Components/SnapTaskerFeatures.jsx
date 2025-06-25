@@ -4,10 +4,10 @@ const SnapTaskerFeatures = () => {
     return (
         <div className="relative bg-white px-6 md:px-16 py-16 overflow-hidden">
             {/* Background decorations */}
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-800 rounded-full -z-10"></div>
-            <div className="absolute bottom-10 left-72 w-6 h-6 bg-purple-800 rounded-full -z-10"></div>
-            <div className="absolute bottom-8 left-96 w-10 h-10 bg-purple-800 rounded-full -z-10"></div>
-            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-300 rounded-br-full -z-10"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-800 rounded-full opacity-50 hidden md:block"></div>
+            <div className="absolute bottom-10 left-72 w-6 h-6 bg-purple-800 rounded-full opacity-50 hidden lg:block"></div>
+            <div className="absolute bottom-8 left-96 w-10 h-10 bg-purple-800 rounded-full opacity-50 hidden lg:block"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-300 rounded-br-full opacity-50 hidden lg:block"></div>
 
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-10">
 
