@@ -72,11 +72,18 @@ const Navbar = () => {
                     </p>
                 )}
             </NavLink>
+            <NavLink to="/mydashboard">
+                {({ isActive }) => (
+                    <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                        Dashboard
+                    </p>
+                )}
+            </NavLink>
         </div>
     );
 
     return (
-        <div className=" bg-base-100 text-base-content lg:sticky top-0 z-50">
+        <div className="  text-base-content lg:sticky top-0 z-50 backdrop-blur-xl bg-white/40 dark:bg-gray-900/60 transparent">
             <div className="navbar bg-base-100 shadow">
                 <div className="navbar-start">
                     <div className="dropdown">

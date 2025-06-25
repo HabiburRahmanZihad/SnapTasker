@@ -9,66 +9,66 @@ const TaskDetails = () => {
     const taskId = _id;
 
     return (
-        <div className="min-h-[calc(100vh-190px)] bg-[#E5E4E2] flex flex-col items-center justify-center p-4">
-            <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full p-6 md:p-10 transition-transform transform hover:scale-105 mb-6">
-                <div className="mb-6 border-b pb-4">
-                    <h1 className="text-3xl md:text-4xl font-bold text-[#4B0082]">{title}</h1>
-                    <p className="text-lg text-gray-500 mt-1">
-                        Category: <span className="font-medium">{category}</span>
-                    </p>
+        <div className="relative bg-gradient-to-br from-purple-100 via-white to-purple-50 p-6 md:p-16 flex flex-col items-center justify-center">
+
+            {/* Glassmorphism Task Card */}
+            <div className="w-full max-w-3xl p-8 bg-white/80 border border-purple-200 backdrop-blur-xl shadow-2xl rounded-3xl transition-transform hover:scale-[1.02] duration-300 mb-10">
+                <div className="mb-6 pb-4 border-b border-purple-200">
+                    <h1 className="text-4xl font-bold text-purple-900">{title}</h1>
+                    <p className="text-lg text-purple-700 mt-2">📂 Category: <span className="font-semibold">{category}</span></p>
                 </div>
 
-                <div className="space-y-4 text-gray-700">
+                <div className="space-y-6 text-gray-800">
                     <div>
-                        <h2 className="font-semibold text-lg">Description:</h2>
-                        <p className="text-sm md:text-base">{description}</p>
+                        <h2 className="font-semibold text-xl text-purple-800">📝 Description</h2>
+                        <p className="mt-1 text-base">{description}</p>
                     </div>
 
-                    <div className="flex flex-col md:flex-row md:justify-between gap-4">
+                    <div className="grid md:grid-cols-3 gap-6 mt-4">
                         <div>
-                            <h3 className="font-semibold">Assigned By :</h3>
-                            <p>{name}</p>
+                            <h3 className="text-purple-700 font-semibold">👤 Assigned By</h3>
+                            <p className="text-base">{name}</p>
                             <p className="text-sm text-gray-500">{email}</p>
                         </div>
                         <div>
-                            <h3 className="font-semibold">Budget:</h3>
-                            <p>${budget}</p>
+                            <h3 className="text-purple-700 font-semibold">💰 Budget</h3>
+                            <p className="text-base font-medium">${budget}</p>
                         </div>
                         <div>
-                            <h3 className="font-semibold">Deadline:</h3>
-                            <p>{deadline}</p>
+                            <h3 className="text-purple-700 font-semibold">⏰ Deadline</h3>
+                            <p className="text-base font-medium">{deadline}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-4">
-
+            {/* Action Buttons */}
+            <div className="flex flex-col md:flex-row gap-4 items-center">
                 <Link
                     to={`/applyTask/${taskId}`}
-                    className="bg-[#4B0082] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#5d00a6] transition duration-300 flex items-center gap-2"
+                    className="bg-purple-700 hover:bg-purple-900 text-white font-semibold px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 transition duration-300"
                 >
-
-                    Apply
-                    <LuBookUp size={25} />
+                    Apply Now <LuBookUp size={22} />
                 </Link>
 
                 <Link
                     to="/browseTasks"
-                    className="bg-[#4B0082] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#5d00a6] transition duration-300 flex items-center gap-2"
+                    className="bg-purple-700 hover:bg-purple-900 text-white font-semibold px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 transition duration-300"
                 >
-                    Browse more tasks
-                    <PiBrowsersFill size={25} />
+                    Browse More <PiBrowsersFill size={22} />
                 </Link>
 
                 <Link
                     to={`/viewApplications/${taskId}`}
-                    className="bg-[#4B0082] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#5d00a6] transition duration-300 flex items-center gap-2"
+                    className="bg-purple-700 hover:bg-purple-900 text-white font-semibold px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 transition duration-300"
                 >
-                    View Applications
-                    <MdOutlinePageview size={25}/>
+                    View Applications <MdOutlinePageview size={22} />
                 </Link>
             </div>
+
+            {/* Background decoration */}
+            <div className="absolute bottom-0 right-0 w-72 h-72 bg-purple-200 rounded-full hidden lg:block opacity-50"></div>
+            <div className="absolute top-0 left-0 w-56 h-56 bg-purple-300 rounded-full  hidden lg:block opacity-50"></div>
         </div>
     );
 };

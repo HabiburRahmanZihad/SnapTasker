@@ -1,5 +1,5 @@
 import { Suspense, useContext } from "react";
-import MyApplicationlist from "../Components/MyApplicationlist";
+import MyApplicationList from "../Components/MyApplicationList";
 import { AuthContext } from "../Provider/AuthContext";
 import { myApplicationPromise } from "../api/applicationApi";
 import Loading from "../Components/Loading";
@@ -8,16 +8,14 @@ const MyApplications = () => {
     const { user } = useContext(AuthContext);
 
     return (
-        <div>
-            <h1 className='text-3xl font-bold text-center mt-10 mb-5 text-[#4B0082]'>My Applications</h1>
+        <div className="min-h-screen px-4 py-10 bg-gradient-to-br from-purple-50 to-purple-100">
+            <h1 className="text-4xl font-bold text-center text-purple-800 mb-8">
+                📄 My Applications
+            </h1>
 
-            <ul className="list bg-base-100 rounded-box shadow-md">
-
-                <Suspense fallback={<Loading />}>
-                    <MyApplicationlist myApplicationPromise={myApplicationPromise(user.email)} />
-                </Suspense>
-
-            </ul>
+            <Suspense fallback={<Loading />}>
+                <MyApplicationList myApplicationPromise={myApplicationPromise(user.email)} />
+            </Suspense>
         </div>
     );
 };

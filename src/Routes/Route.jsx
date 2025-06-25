@@ -15,6 +15,7 @@ import UpdateTask from '../Pages/UpdateTask';
 import ApplyTask from '../Pages/ApplyTask';
 import MyApplications from '../Pages/MyApplications';
 import ViewAllApplications from '../Pages/ViewAllApplications';
+import Dashboard from '../Pages/Dashboard';
 
 export const router = createBrowserRouter([
     {
@@ -85,7 +86,9 @@ export const router = createBrowserRouter([
                 path: '/viewApplications/:id',
                 loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/applications/task/${params.id}`),
                 element: <PrivateRoute><ViewAllApplications></ViewAllApplications></PrivateRoute>
-            }
+            },
+
+            { path: '/mydashboard', element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute> },
 
         ]
     },

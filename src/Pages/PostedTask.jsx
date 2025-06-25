@@ -15,7 +15,6 @@ const PostedTask = () => {
     const filteredTasks = initialData.filter(task => task.email === user?.email);
     const [tasks, setTasks] = useState(filteredTasks);
 
-    // Load bids count from database when component mounts
     useEffect(() => {
         const fetchBidCount = async () => {
             if (user?.email) {
@@ -23,14 +22,7 @@ const PostedTask = () => {
                     setLoading(true);
                     const response = await fetch(`${import.meta.env.VITE_API_URL}/bids/user/${user.email}`);
                     const bids = await response.json();
-
-                    // Check if we got an array of bids back
-                    if (Array.isArray(bids)) {
-                        setBidsCount(bids.length);
-                    } else {
-                        console.error("Expected array of bids but got:", bids);
-                        setBidsCount(0);
-                    }
+                    setBidsCount(Array.isArray(bids) ? bids.length : 0);
                 } catch (error) {
                     console.error("Error fetching bid count:", error);
                     setBidsCount(0);
@@ -39,33 +31,28 @@ const PostedTask = () => {
                 }
             }
         };
-
         fetchBidCount();
     }, [user?.email]);
 
-    const handleDelete = async (id) => {
+    const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            text: "You won’t be able to revert this!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#4B0082",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
+        }).then(result => {
             if (result.isConfirmed) {
-                // delete task from database
                 fetch(`${import.meta.env.VITE_API_URL}/task/${id}`, {
                     method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
+                    headers: { "Content-Type": "application/json" }
                 })
                     .then(res => res.json())
                     .then(data => {
                         if (data.deletedCount > 0) {
-                            const remainingTasks = tasks.filter(task => task._id !== id);
-                            setTasks(remainingTasks);
+                            setTasks(prev => prev.filter(task => task._id !== id));
                             Swal.fire("Deleted!", "Your task has been deleted.", "success");
                         }
                     });
@@ -73,168 +60,108 @@ const PostedTask = () => {
         });
     };
 
-    const handleBidClick = (taskId) => {
+    const handleBidClick = async (taskId) => {
         if (!user?.email) {
-            Swal.fire({
-                icon: "error",
-                title: "Authentication Required",
-                text: "Please log in to place a bid"
-            });
+            Swal.fire({ icon: "error", title: "Login Required", text: "Please log in to bid." });
             return;
         }
 
-        // Find the task details
         const task = tasks.find(t => t._id === taskId);
-        if (!task) {
-            console.error("Task not found");
-            return;
-        }
-
-        // Create bid object to send to database
         const bidData = {
             taskId,
             userEmail: user.email,
             bidDate: new Date(),
-            // Store additional info that might be useful
             taskTitle: task.title,
             taskCategory: task.category,
             taskBudget: task.budget
         };
 
-        // Check if this user has already bid on this task
-        fetch(`${import.meta.env.VITE_API_URL}/bids/check/${user.email}/${taskId}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.exists) {
-                    // User has already bid on this task
-                    Swal.fire({
-                        icon: "info",
-                        title: "Already Bid",
-                        text: "You have already placed a bid on this task"
-                    });
-                    return;
-                }
+        const checkRes = await fetch(`${import.meta.env.VITE_API_URL}/bids/check/${user.email}/${taskId}`);
+        const checkData = await checkRes.json();
 
-                // Save bid to database if user hasn't bid yet
-                return fetch(`${import.meta.env.VITE_API_URL}/bids`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(bidData)
-                });
-            })
-            .then(res => {
-                if (!res) return null; // Early return if we already showed the "already bid" message
-                return res.json();
-            })
-            .then(data => {
-                if (!data) return; // Early return if we already showed the "already bid" message
+        if (checkData.exists) {
+            Swal.fire({ icon: "info", title: "Already Bid", text: "You already bid on this task." });
+            return;
+        }
 
-                if (data.insertedId || data.success) {
-                    // Update the local bid count
-                    const newBidsCount = bidsCount + 1;
-                    setBidsCount(newBidsCount);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/bids`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(bidData)
+        });
+        const result = await res.json();
 
-                    // Show success notification
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Bid submitted successfully!",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            })
-            .catch(error => {
-                console.error("Error submitting bid:", error);
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Failed to submit bid. Please try again."
-                });
+        if (result.insertedId || result.success) {
+            setBidsCount(prev => prev + 1);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Bid submitted!",
+                showConfirmButton: false,
+                timer: 1500
             });
+        }
     };
 
     return (
-        <div className="px-4 py-8 sm:px-6 lg:px-12 bg-gray-50 min-h-screen">
-            <h2 className="text-3xl font-semibold text-center text-[#4B0082] mb-4">My Posted Tasks</h2>
+        <div className=" bg-gradient-to-tr from-purple-50 to-purple-100 px-4 py-10 min-h-screen">
+            <h2 className="text-4xl font-bold text-center text-purple-800 mb-4">📝 My Posted Tasks</h2>
 
-            {/* Display bid count */}
-            {loading ? (
-                <p className="text-center text-lg text-gray-700 mb-6">Loading bid information...</p>
-            ) : (
-                <p className="text-center text-lg text-gray-700 mb-6">
-                    You bid for {bidsCount} opportunities.
-                </p>
-            )}
-
-            <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-[#4B0082]">
-                        <tr className="text-xl" >
-                            <th className="px-6 py-4 text-left font-medium text-white uppercase tracking-wider">Title</th>
-                            <th className="px-6 py-4 text-left font-medium text-white uppercase tracking-wider">Category</th>
-                            <th className="px-6 py-4 text-left font-medium text-white uppercase tracking-wider">Budget</th>
-                            <th className="px-6 py-4 text-left font-medium text-white uppercase tracking-wider">Deadline</th>
-                            <th className="px-6 py-4 text-center font-medium text-white uppercase tracking-wider">Actions</th>
-                        </tr>
-                    </thead>
-
-                    <tbody className="bg-white divide-y divide-gray-200">
-                        {tasks.length === 0 ? (
-                            <tr>
-                                <td colSpan="5" className="px-6 py-8 text-center text-gray-500 text-lg">
-                                    You haven't posted any tasks yet.
-                                </td>
-                            </tr>
-                        ) : (
-                            tasks.map((task, index) => (
-                                <tr
-                                    key={task._id}
-                                    className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
-                                >
-                                    <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-900">{task.title}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-600">{task.category}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-lg text-green-600 font-medium">${task.budget}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-lg text-gray-700">
-                                        {typeof task.deadline === 'string'
-                                            ? new Date(task.deadline).toLocaleDateString()
-                                            : task.deadline instanceof Date
-                                                ? task.deadline.toLocaleDateString()
-                                                : task.deadline}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-center">
-                                        <div className="flex flex-wrap justify-center gap-2">
-                                            <Link
-                                                to={`/updatetask/${task._id}`}
-                                                className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1.5 rounded-md transition-all duration-200"
-                                            >
-                                                <FaPencilAlt />
-                                            </Link>
-
-                                            <button
-                                                onClick={() => handleDelete(task._id)}
-                                                className="bg-red-500 hover:bg-red-600 text-white px-4 py-1.5 rounded-md transition-all duration-200"
-                                            >
-                                                <MdDeleteForever />
-                                            </button>
-
-                                            <button
-                                                onClick={() => handleBidClick(task._id)}
-                                                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-md transition-all duration-200"
-                                            >
-                                                <BiData />
-                                            </button>
-
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
+            <div className="text-center mb-10">
+                {loading ? (
+                    <p className="text-lg text-gray-600">Loading bids...</p>
+                ) : (
+                    <p className="text-lg text-purple-700 font-medium">
+                        You have <span className="text-purple-900 font-bold">{bidsCount}</span> bids placed.
+                    </p>
+                )}
             </div>
+
+            {tasks.length === 0 ? (
+                <div className="text-center text-gray-500 text-xl mt-20">
+                    😢 You haven’t posted any tasks yet.
+                </div>
+            ) : (
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+                    {tasks.map(task => (
+                        <div
+                            key={task._id}
+                            className="bg-white border border-purple-200 rounded-xl shadow-md p-6 transition hover:shadow-xl"
+                        >
+                            <h3 className="text-2xl font-bold text-purple-800 mb-2">{task.title}</h3>
+                            <p className="text-gray-600 mb-1"><strong>Category:</strong> {task.category}</p>
+                            <p className="text-gray-600 mb-1"><strong>Budget:</strong> ${task.budget}</p>
+                            <p className="text-gray-600 mb-4"><strong>Deadline:</strong> {new Date(task.deadline).toLocaleDateString()}</p>
+
+                            <div className="flex flex-wrap gap-3">
+                                <Link
+                                    to={`/updatetask/${task._id}`}
+                                    className="flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-md transition"
+                                >
+                                    <FaPencilAlt />
+                                    Edit
+                                </Link>
+
+                                <button
+                                    onClick={() => handleDelete(task._id)}
+                                    className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition"
+                                >
+                                    <MdDeleteForever />
+                                    Delete
+                                </button>
+
+                                <button
+                                    onClick={() => handleBidClick(task._id)}
+                                    className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition"
+                                >
+                                    <BiData />
+                                    Bid
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
