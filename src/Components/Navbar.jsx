@@ -44,13 +44,6 @@ const Navbar = () => {
                     </p>
                 )}
             </NavLink>
-            <NavLink to="/addtask">
-                {({ isActive }) => (
-                    <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
-                        Add Task
-                    </p>
-                )}
-            </NavLink>
             <NavLink to="/browseTasks">
                 {({ isActive }) => (
                     <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
@@ -58,27 +51,40 @@ const Navbar = () => {
                     </p>
                 )}
             </NavLink>
-            <NavLink to="/postedTasks">
-                {({ isActive }) => (
-                    <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
-                        My Posted Tasks
-                    </p>
+
+            {
+                user && (
+                    <>
+                        <NavLink to="/addtask">
+                            {({ isActive }) => (
+                                <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                                    Add Task
+                                </p>
+                            )}
+                        </NavLink>
+                        <NavLink to="/postedTasks">
+                            {({ isActive }) => (
+                                <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                                    My Posted Tasks
+                                </p>
+                            )}
+                        </NavLink>
+                        <NavLink to="/myApplications">
+                            {({ isActive }) => (
+                                <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                                    My Applications
+                                </p>
+                            )}
+                        </NavLink>
+                        <NavLink to="/mydashboard">
+                            {({ isActive }) => (
+                                <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                                    Dashboard
+                                </p>
+                            )}
+                        </NavLink>
+                    </>
                 )}
-            </NavLink>
-            <NavLink to="/myApplications">
-                {({ isActive }) => (
-                    <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
-                        My Applications
-                    </p>
-                )}
-            </NavLink>
-            <NavLink to="/mydashboard">
-                {({ isActive }) => (
-                    <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
-                        Dashboard
-                    </p>
-                )}
-            </NavLink>
         </div>
     );
 
