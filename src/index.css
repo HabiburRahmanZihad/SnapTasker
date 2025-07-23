@@ -4,8 +4,40 @@
 
 @tailwind utilities;
 
+/* ============================
+    DaisyUI Theme Configuration
+============================ */
 @plugin "daisyui" {
-    themes: light --default, dark --prefersdark;
+    themes: light --default, dark;
+}
+
+
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+
+    --color-primary: #6E11B0; /* Your brand purple */
+    --color-secondary: #FF6B6B; /* Warm coral for CTA contrast */
+    --color-accent: #924DD2; /* Lighter purple for accents */
+    --color-neutral: #1A1A1A; /* Strong dark for body text */
+    --color-base-100: #FFFFFF; /* White background */
+    --color-base-200: #F9F6FB; /* Very light lavender for cards */
+    --color-base-300: #E7DFF1; /* Soft purple-gray for borders */
+}
+
+@plugin "daisyui/theme" {
+    name: "dark";
+
+    --color-primary: #C184F2; /* Softer purple for dark BG */
+    --color-secondary: #FF8787; /* Warmer pinkish coral */
+    --color-accent: #B766F1; /* Vivid accent on dark */
+    --color-neutral: #DADADA; /* Light gray text */
+    --color-base-100: #121212; /* Very dark background */
+    --color-base-200: #1C1423; /* Subtle purple tint BG */
+    --color-base-300: #2D1A44; /* Dark violet-gray for cards/borders */
+    --color-highlight: #DDA6F2; /* Hover highlight */
+    --color-info: #B799F7; /* Info badges */
+    --color-content: #EDEDED; /* General readable text */
 }
 
 

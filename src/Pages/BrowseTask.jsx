@@ -66,9 +66,6 @@ const BrowseTask = () => {
                 ))}
             </div>
 
-            {/* Background Decorations */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-200 rounded-bl-full -z-10 opacity-30"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-300 rounded-tr-full -z-10 opacity-30"></div>
         </div>
     );
 };
