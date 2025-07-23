@@ -21,26 +21,32 @@ const BrowseTask = () => {
     });
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-100 to-white p-8 md:p-16">
+        <div className="min-h-screen bg-gradient-to-br from-[#f0f0ff] to-[#e5e4f7] p-8 md:p-16">
             {/* Header */}
-            <h1 className="text-4xl font-bold text-center text-purple-800 mb-10 drop-shadow-lg">Explore Available Tasks</h1>
+            <h1 className="text-4xl font-bold text-center text-purple-800 mb-10 drop-shadow-lg">
+                Explore Available Tasks
+            </h1>
 
             {/* Filters */}
             <div className="flex flex-wrap justify-center gap-4 mb-10">
                 <select
-                    className="select select-bordered border-purple-800 bg-white text-purple-800 font-semibold"
+                    className="select select-bordered w-full sm:w-auto bg-white border-2 border-purple-800 text-purple-800 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
                 >
-                    {categories.map(cat => <option key={cat}>{cat}</option>)}
+                    {categories.map((cat) => (
+                        <option key={cat}>{cat}</option>
+                    ))}
                 </select>
 
                 <select
-                    className="select select-bordered border-purple-800 bg-white text-purple-800 font-semibold"
+                    className="select select-bordered w-full sm:w-auto bg-white border-2 border-purple-800 text-purple-800 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
                     value={sortOrder}
                     onChange={(e) => setSortOrder(e.target.value)}
                 >
-                    {sortOptions.map(opt => <option key={opt}>{opt}</option>)}
+                    {sortOptions.map((opt) => (
+                        <option key={opt}>{opt}</option>
+                    ))}
                 </select>
             </div>
 
@@ -49,23 +55,29 @@ const BrowseTask = () => {
                 {sortedData.map((task, index) => (
                     <div
                         key={task._id || index}
-                        className="p-6 rounded-3xl shadow-xl bg-white/80 backdrop-blur border border-purple-200 hover:shadow-purple-300 hover:scale-[1.03] transition-transform duration-300"
+                        className="bg-white/80 border-2 border-purple-800 rounded-3xl p-6 shadow-[4px_6px_0px_rgba(128,0,128,0.4)] backdrop-blur transition-transform hover:scale-[1.03] hover:shadow-purple-400"
                     >
                         <h2 className="text-2xl font-bold text-purple-800 mb-3">{task.title}</h2>
-                        <p className="text-sm text-gray-600 mb-1">Category: <span className="font-medium">{task.category}</span></p>
-                        <p className="text-sm text-gray-600 mb-1">Deadline: <span className="font-medium">{task.deadline}</span></p>
-                        <p className="text-sm text-gray-600 mb-1">Budget: <span className="font-medium">${task.budget}</span></p>
-                        <p className="text-sm text-gray-700 mt-3 mb-5 line-clamp-3">{task.description}</p>
+                        <p className="text-sm text-gray-700 mb-1">
+                            <span className="font-semibold text-purple-700">Category:</span> {task.category}
+                        </p>
+                        <p className="text-sm text-gray-700 mb-1">
+                            <span className="font-semibold text-purple-700">Deadline:</span> {task.deadline}
+                        </p>
+                        <p className="text-sm text-gray-700 mb-1">
+                            <span className="font-semibold text-purple-700">Budget:</span> ${task.budget}
+                        </p>
+                        <p className="text-sm text-gray-800 mt-3 mb-5 line-clamp-3">{task.description}</p>
+
                         <Link
                             to={`/taskDetails/${task._id}`}
-                            className="btn bg-purple-700 hover:bg-purple-900 text-white font-semibold w-full flex items-center justify-center gap-2"
+                            className="btn w-full bg-purple-800 hover:bg-purple-900 text-white font-semibold flex items-center justify-center gap-2 transition"
                         >
                             View Details <BsFillInfoSquareFill />
                         </Link>
                     </div>
                 ))}
             </div>
-
         </div>
     );
 };
