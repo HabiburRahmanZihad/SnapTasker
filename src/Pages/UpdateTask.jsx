@@ -54,7 +54,7 @@ const UpdateTask = () => {
     return (
         <form
             onSubmit={handleUpdateTask}
-            className="max-w-2xl mx-auto mt-12 p-10 rounded-3xl backdrop-blur-xl 
+            className="max-w-2xl mx-auto my-12 p-10 rounded-3xl backdrop-blur-xl 
             bg-[url('/assets/updateTask.jpg')] bg-cover bg-center bg-no-repeat 
             border border-primary/20 shadow-2xl hover:shadow-primary transition duration-300"
         >

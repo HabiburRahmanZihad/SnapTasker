@@ -62,7 +62,7 @@ const ApplyTask = () => {
             const existingApplications = await axios.get(
                 `${import.meta.env.VITE_API_URL}/applications?email=${applicationData.applicantEmail}&taskId=${_id}`, {
                 withCredentials: true,
-                }
+            }
             );
 
             if (existingApplications.data.length > 0) {
@@ -108,127 +108,140 @@ const ApplyTask = () => {
     };
 
     return (
-        <div className="text-white p-4 flex justify-center items-center">
-            <div className="flex flex-col-reverse md:flex-row items-center gap-8 max-w-6xl w-full">
+        <div className="min-h-screen bg-gradient-to-br from-primary/10 via-white to-primary/20 px-4 py-10 flex justify-center items-center">
+            <div className="flex flex-col-reverse md:flex-row items-center gap-10 w-full max-w-7xl">
+
                 {/* Form Section */}
                 <form
                     onSubmit={handleSubmit}
-                    className="flex-1 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 p-8 rounded-lg space-y-6 shadow-xl w-full"
+                    className="flex-1 w-full bg-base-100 border border-primary/30 shadow-xl rounded-3xl p-10 space-y-6 backdrop-blur-md"
                 >
-                    <h2 className="text-center text-4xl font-extrabold">Job Requisition Form</h2>
+                    <h2 className="text-4xl font-extrabold text-center text-primary mb-6 font-rancho tracking-wide">
+                        Job Requisition Form
+                    </h2>
 
+                    {/* Job Title */}
                     <div>
-                        <label htmlFor="jobTitle" className="block mb-2 font-semibold">Job Title</label>
+                        <label htmlFor="jobTitle" className="block mb-2 text-sm font-semibold text-primary">Job Title</label>
                         <input
                             type="text"
                             id="jobTitle"
                             value={title}
                             readOnly
-                            className="w-full p-3 rounded border border-gray-300 focus:ring-purple-500"
+                            className="input w-full bg-base-100 text-base-content border border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         />
                     </div>
 
+                    {/* Email */}
                     <div>
-                        <label htmlFor="email" className="block mb-2 font-semibold">Your Email</label>
+                        <label htmlFor="email" className="block mb-2 text-sm font-semibold text-primary">Your Email</label>
                         <input
                             type="email"
                             name="email"
                             id="email"
                             defaultValue={user?.email || ""}
                             readOnly
-                            className="w-full p-3 rounded border border-gray-300 focus:ring-purple-500"
+                            className="input w-full bg-base-100 text-base-content border border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         />
                     </div>
 
+                    {/* Name */}
                     <div>
-                        <label htmlFor="name" className="block mb-2 font-semibold">Your Name</label>
+                        <label htmlFor="name" className="block mb-2 text-sm font-semibold text-primary">Your Name</label>
                         <input
                             type="text"
                             name="name"
                             id="name"
                             defaultValue={user?.displayName || ""}
                             readOnly
-                            className="w-full p-3 rounded border border-gray-300 focus:ring-purple-500"
+                            className="input w-full bg-base-100 text-base-content border border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         />
                     </div>
 
+                    {/* Resume */}
                     <div>
-                        <label htmlFor="resume" className="block mb-2 font-semibold">Resume Link *</label>
+                        <label htmlFor="resume" className="block mb-2 text-sm font-semibold text-primary">Resume Link *</label>
                         <input
                             type="url"
                             name="resume"
                             id="resume"
                             required
                             placeholder="https://your-resume-link"
-                            className="w-full p-3 rounded border border-gray-300 focus:ring-purple-500"
+                            className="input w-full bg-base-100 border border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         />
                     </div>
 
+                    {/* LinkedIn */}
                     <div>
-                        <label htmlFor="linkedin" className="block mb-2 font-semibold">LinkedIn Profile *</label>
+                        <label htmlFor="linkedin" className="block mb-2 text-sm font-semibold text-primary">LinkedIn Profile *</label>
                         <input
                             type="url"
                             name="linkedin"
                             id="linkedin"
                             required
                             placeholder="https://linkedin.com/in/your-profile"
-                            className="w-full p-3 rounded border border-gray-300 focus:ring-purple-500"
+                            className="input w-full bg-base-100 border border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         />
                     </div>
 
+                    {/* GitHub */}
                     <div>
-                        <label htmlFor="github" className="block mb-2 font-semibold">GitHub Profile *</label>
+                        <label htmlFor="github" className="block mb-2 text-sm font-semibold text-primary">GitHub Profile *</label>
                         <input
                             type="url"
                             name="github"
                             id="github"
                             required
                             placeholder="https://github.com/your-username"
-                            className="w-full p-3 rounded border border-gray-300 focus:ring-purple-500"
+                            className="input w-full bg-base-100 border border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         />
                     </div>
 
+                    {/* Facebook */}
                     <div>
-                        <label htmlFor="facebook" className="block mb-2 font-semibold">Facebook Profile (optional)</label>
+                        <label htmlFor="facebook" className="block mb-2 text-sm font-semibold text-primary">Facebook Profile (optional)</label>
                         <input
                             type="url"
                             name="facebook"
                             id="facebook"
                             placeholder="https://facebook.com/your-profile"
-                            className="w-full p-3 rounded border border-gray-300 focus:ring-purple-500"
+                            className="input w-full bg-base-100 border border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         />
                     </div>
 
+                    {/* Reason */}
                     <div>
-                        <label htmlFor="reason" className="block mb-2 font-semibold">Why do you want to join us? *</label>
+                        <label htmlFor="reason" className="block mb-2 text-sm font-semibold text-primary">Why do you want to join us? *</label>
                         <textarea
                             name="reason"
                             id="reason"
                             rows="4"
                             required
-                            className="w-full p-3 rounded border border-gray-300 focus:ring-purple-500 resize-none"
+                            placeholder="Let us know why you'd be a great fit..."
+                            className="textarea w-full bg-base-100 border border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         />
                     </div>
 
+                    {/* Submit Button */}
                     <button
                         type="submit"
                         disabled={loading}
                         aria-busy={loading}
-                        className={`block w-full font-semibold px-6 py-3 rounded-full transition ${loading
-                                ? "bg-purple-400 cursor-not-allowed"
-                                : "bg-purple-700 hover:bg-purple-800 text-white"
-                            }`}
+                        className={`btn w-full text-lg font-semibold text-white ${loading
+                            ? "bg-primary/60 cursor-not-allowed"
+                            : "bg-primary hover:bg-primary-focus"
+                            } transition-all duration-300`}
                     >
                         {loading ? "Submitting..." : "Continue With Us"}
                     </button>
                 </form>
 
-                {/* Lottie Animation */}
+                {/* Animation Section */}
                 <div className="flex-1 flex justify-center">
                     <Lottie
                         animationData={applyTaskLottie}
-                        loop={true}
-                        className="w-[400px] h-[400px]"
+                        loop
+                        className="w-[380px] md:w-[450px] h-auto"
                     />
                 </div>
             </div>
