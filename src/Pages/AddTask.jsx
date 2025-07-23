@@ -47,38 +47,44 @@ const AddTask = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center bg-gradient-to-br from-[#f0f0ff] to-[#e5e4f7] px-6 py-12 gap-10">
-            {/* Lottie */}
+        <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center bg-gradient-to-br from-base-200 to-base-100 px-6 py-12 gap-10">
+            {/* Lottie Animation */}
             <div className="w-full max-w-lg">
                 <Lottie animationData={addTask} loop className="w-full h-auto" />
             </div>
 
-            {/* Form */}
+            {/* Task Form */}
             <form
                 onSubmit={handleAddTask}
-                className="w-full max-w-xl bg-white/70 backdrop-blur-xl border border-white/30 shadow-2xl rounded-3xl p-8 space-y-6"
+                className="w-full max-w-xl bg-base-100/80 backdrop-blur-xl border border-base-300 shadow-2xl rounded-3xl p-8 space-y-6"
             >
-                <h2 className="text-4xl font-extrabold text-center text-purple-800 mb-4">Add New Task</h2>
+                <h2 className="text-4xl font-extrabold text-center text-primary mb-4">
+                    Add New Task
+                </h2>
 
                 {/* Title */}
                 <div>
-                    <label className="text-gray-700 font-medium block mb-1">Title</label>
+                    <label className="text-base-content font-medium block mb-1">
+                        Title
+                    </label>
                     <input
                         name="title"
                         type="text"
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-white/80 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
+                        className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         placeholder="Enter task title"
                     />
                 </div>
 
                 {/* Category */}
                 <div>
-                    <label className="text-gray-700 font-medium block mb-1">Category</label>
+                    <label className="text-base-content font-medium block mb-1">
+                        Category
+                    </label>
                     <select
                         name="category"
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-white/80 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
+                        className="select select-bordered w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                     >
                         <option value="">Select category</option>
                         <option value="Web Development">Web Development</option>
@@ -90,65 +96,72 @@ const AddTask = () => {
 
                 {/* Description */}
                 <div>
-                    <label className="text-gray-700 font-medium block mb-1">Description</label>
+                    <label className="text-base-content font-medium block mb-1">
+                        Description
+                    </label>
                     <textarea
                         name="description"
                         rows="4"
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-white/80 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition resize-none"
+                        className="textarea textarea-bordered w-full resize-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         placeholder="Enter task description"
                     />
                 </div>
 
-                {/* Deadline + Budget */}
+                {/* Deadline & Budget */}
                 <div className="flex flex-col md:flex-row gap-4">
                     <div className="w-full">
-                        <label className="text-gray-700 font-medium block mb-1">Deadline</label>
+                        <label className="text-base-content font-medium block mb-1">
+                            Deadline
+                        </label>
                         <input
                             type="date"
                             name="deadline"
                             required
-                            className="w-full px-4 py-3 rounded-xl bg-white/80 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
+                            className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         />
                     </div>
                     <div className="w-full">
-                        <label className="text-gray-700 font-medium block mb-1">Budget ($)</label>
+                        <label className="text-base-content font-medium block mb-1">
+                            Budget ($)
+                        </label>
                         <input
                             type="number"
                             name="budget"
                             placeholder="e.g. 500"
                             required
-                            className="w-full px-4 py-3 rounded-xl bg-white/80 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
+                            className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         />
                     </div>
                 </div>
 
-                {/* Email + Name (Disabled) */}
+                {/* Email & Name (Disabled) */}
                 <div className="flex flex-col md:flex-row gap-4">
                     <input
                         type="email"
                         value={user?.email || "no email"}
                         disabled
-                        className="w-full px-4 py-3 rounded-xl bg-gray-100 text-gray-600 border border-gray-200 cursor-not-allowed"
+                        className="input input-disabled w-full"
                     />
                     <input
                         type="text"
-                        value={user?.displayName || "beluga"}
+                        value={user?.displayName || "Anonymous"}
                         disabled
-                        className="w-full px-4 py-3 rounded-xl bg-gray-100 text-gray-600 border border-gray-200 cursor-not-allowed"
+                        className="input input-disabled w-full"
                     />
                 </div>
 
-                {/* Submit */}
+                {/* Submit Button */}
                 <button
                     type="submit"
-                    className="w-full bg-[#4B0082] hover:bg-purple-900 text-white text-xl font-semibold py-3 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
+                    className="btn btn-primary w-full text-lg font-semibold"
                 >
                     🚀 Submit Task
                 </button>
             </form>
         </div>
     );
+
 };
 
 export default AddTask;
