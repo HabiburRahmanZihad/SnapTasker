@@ -5,6 +5,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { BiData } from "react-icons/bi";
 import Swal from "sweetalert2";
+import Loading from "../Components/Loading";
 
 const PostedTask = () => {
     const { user } = useContext(AuthContext);
@@ -104,21 +105,21 @@ const PostedTask = () => {
     };
 
     return (
-        <div className=" bg-gradient-to-tr from-purple-50 to-purple-100 px-4 py-10 min-h-screen">
-            <h2 className="text-4xl font-bold text-center text-purple-800 mb-4">📝 My Posted Tasks</h2>
+        <div className="bg-gradient-to-tr from-primary/10 to-base-200 px-4 py-10 min-h-screen">
+            <h2 className="text-4xl font-bold text-center text-primary mb-4">My Posted Tasks</h2>
 
             <div className="text-center mb-10">
                 {loading ? (
-                    <p className="text-lg text-gray-600">Loading bids...</p>
+                    <Loading></Loading>
                 ) : (
-                    <p className="text-lg text-purple-700 font-medium">
-                        You have <span className="text-purple-900 font-bold">{bidsCount}</span> bids placed.
+                    <p className="text-lg font-medium text-primary">
+                        You have <span className="font-bold text-primary">{bidsCount}</span> bids placed.
                     </p>
                 )}
             </div>
 
             {tasks.length === 0 ? (
-                <div className="text-center text-gray-500 text-xl mt-20">
+                <div className="text-center text-base-content/60 text-xl mt-20">
                     😢 You haven’t posted any tasks yet.
                 </div>
             ) : (
@@ -126,17 +127,19 @@ const PostedTask = () => {
                     {tasks.map(task => (
                         <div
                             key={task._id}
-                            className="bg-white border border-purple-200 rounded-xl shadow-md p-6 transition hover:shadow-xl"
+                            className="bg-base-100 border border-base-300 rounded-2xl shadow-md p-6 transition hover:shadow-xl"
                         >
-                            <h3 className="text-2xl font-bold text-purple-800 mb-2">{task.title}</h3>
-                            <p className="text-gray-600 mb-1"><strong>Category:</strong> {task.category}</p>
-                            <p className="text-gray-600 mb-1"><strong>Budget:</strong> ${task.budget}</p>
-                            <p className="text-gray-600 mb-4"><strong>Deadline:</strong> {new Date(task.deadline).toLocaleDateString()}</p>
+                            <h3 className="text-2xl font-bold text-primary mb-2">{task.title}</h3>
+                            <p className="text-base-content mb-1"><strong>Category:</strong> {task.category}</p>
+                            <p className="text-base-content mb-1"><strong>Budget:</strong> ${task.budget}</p>
+                            <p className="text-base-content mb-4">
+                                <strong>Deadline:</strong> {new Date(task.deadline).toLocaleDateString()}
+                            </p>
 
                             <div className="flex flex-wrap gap-3">
                                 <Link
                                     to={`/updatetask/${task._id}`}
-                                    className="flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-md transition"
+                                    className="btn btn-warning btn-sm text-white gap-2"
                                 >
                                     <FaPencilAlt />
                                     Edit
@@ -144,7 +147,7 @@ const PostedTask = () => {
 
                                 <button
                                     onClick={() => handleDelete(task._id)}
-                                    className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition"
+                                    className="btn btn-error btn-sm text-white gap-2"
                                 >
                                     <MdDeleteForever />
                                     Delete
@@ -152,7 +155,7 @@ const PostedTask = () => {
 
                                 <button
                                     onClick={() => handleBidClick(task._id)}
-                                    className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition"
+                                    className="btn btn-info btn-sm text-white gap-2"
                                 >
                                     <BiData />
                                     Bid
@@ -164,6 +167,7 @@ const PostedTask = () => {
             )}
         </div>
     );
+
 };
 
 export default PostedTask;
