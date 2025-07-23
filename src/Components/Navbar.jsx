@@ -39,14 +39,14 @@ const Navbar = () => {
         <div className="flex flex-col lg:flex-row gap-2">
             <NavLink to="/">
                 {({ isActive }) => (
-                    <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                    <p className={`px-4 py-1 border-2 border-[#6E11B0] text-[#6E11B0] text-xl rounded-md hover:bg-[#6E11B0] hover:text-white ${isActive ? 'bg-[#6E11B0] text-white' : ''}`}>
                         Home
                     </p>
                 )}
             </NavLink>
             <NavLink to="/browseTasks">
                 {({ isActive }) => (
-                    <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                    <p className={`px-4 py-1 border-2 border-[#6E11B0] text-[#6E11B0] text-xl rounded-md hover:bg-[#6E11B0] hover:text-white ${isActive ? 'bg-[#6E11B0] text-white' : ''}`}>
                         Browse Tasks
                     </p>
                 )}
@@ -57,28 +57,28 @@ const Navbar = () => {
                     <>
                         <NavLink to="/addtask">
                             {({ isActive }) => (
-                                <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                                <p className={`px-4 py-1 border-2 border-[#6E11B0] text-[#6E11B0] text-xl rounded-md hover:bg-[#6E11B0] hover:text-white ${isActive ? 'bg-[#6E11B0] text-white' : ''}`}>
                                     Add Task
                                 </p>
                             )}
                         </NavLink>
                         <NavLink to="/postedTasks">
                             {({ isActive }) => (
-                                <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                                <p className={`px-4 py-1 border-2 border-[#6E11B0] text-[#6E11B0] text-xl rounded-md hover:bg-[#6E11B0] hover:text-white ${isActive ? 'bg-[#6E11B0] text-white' : ''}`}>
                                     My Posted Tasks
                                 </p>
                             )}
                         </NavLink>
                         <NavLink to="/myApplications">
                             {({ isActive }) => (
-                                <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                                <p className={`px-4 py-1 border-2 border-[#6E11B0] text-[#6E11B0] text-xl rounded-md hover:bg-[#6E11B0] hover:text-white ${isActive ? 'bg-[#6E11B0] text-white' : ''}`}>
                                     My Applications
                                 </p>
                             )}
                         </NavLink>
                         <NavLink to="/mydashboard">
                             {({ isActive }) => (
-                                <p className={`px-4 py-1 border-2 border-primary text-primary text-xl rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                                <p className={`px-4 py-1 border-2 border-[#6E11B0] text-[#6E11B0] text-xl rounded-md hover:bg-[#6E11B0] hover:text-white ${isActive ? 'bg-[#6E11B0] text-white' : ''}`}>
                                     Dashboard
                                 </p>
                             )}
@@ -118,7 +118,7 @@ const Navbar = () => {
                                     data-tooltip-id="my-tooltip"
                                     data-tooltip-content={user.displayName || user.email}
                                     data-tooltip-place="bottom"
-                                    className="w-10 lg:w-15 shrink-0 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 mr-2">
+                                    className="w-10 lg:w-15 shrink-0 rounded-full ring ring-[#6E11B0] ring-offset-base-100 ring-offset-2 mr-2">
                                     <img src={photoURL} alt="user avatar" />
                                 </div>
                             </Link>
@@ -154,7 +154,7 @@ const Navbar = () => {
                         <>
                             <NavLink to="/signin">
                                 {({ isActive }) => (
-                                    <p className={`px-4 py-1 text-xl border-2 border-primary text-primary rounded-md hover:bg-primary hover:text-white ${isActive ? 'bg-primary text-white' : ''}`}>
+                                    <p className={`px-4 py-1 text-xl border-2 border-[#6E11B0] text-[#6E11B0] rounded-md hover:bg-[#6E11B0] hover:text-white ${isActive ? 'bg-[#6E11B0] text-white' : ''}`}>
                                         SignIn
                                     </p>
                                 )}
@@ -162,7 +162,7 @@ const Navbar = () => {
 
                             <NavLink to="/signup">
                                 {({ isActive }) => (
-                                    <p className={`px-4 py-1 text-xl border-2 border-primary text-primary rounded-md hover:bg-primary hover:text-white hidden lg:flex ${isActive ? 'bg-primary text-white' : ''}`}>
+                                    <p className={`px-4 py-1 text-xl border-2 border-[#6E11B0] text-[#6E11B0] rounded-md hover:bg-[#6E11B0] hover:text-white hidden lg:flex ${isActive ? 'bg-[#6E11B0] text-white' : ''}`}>
                                         SignUp
                                     </p>
                                 )}
