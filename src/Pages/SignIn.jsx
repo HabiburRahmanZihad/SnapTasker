@@ -73,87 +73,83 @@ const SignIn = () => {
 
 
     return (
-        <>
-            <div
-                className="min-h-[calc(100vh-200px)] flex items-center justify-center bg-cover bg-center bg-no-repeat p-4"
-                style={{
-                    backgroundImage: "url('/assets/signin.jpeg')",
-                }}
-            >
-                <div className="bg-white/10 backdrop-blur-lg text-white px-12 py-10 rounded-2xl shadow-2xl w-full max-w-xl border border-white/20">
-                    <h2 className="text-4xl rancho font-bold text-center mb-10">Sign In Now !</h2>
+        <div
+            className="min-h-[calc(100vh-200px)] flex items-center justify-center bg-cover bg-center bg-no-repeat p-4"
+            style={{
+                backgroundImage: "url('/assets/signin.jpeg')",
+            }}
+        >
+            <div className="bg-white/10 backdrop-blur-xl text-white px-12 py-10 rounded-2xl shadow-2xl w-full max-w-xl border border-white/20">
+                <h2 className="text-4xl font-bold text-center mb-10 font-rancho">
+                    Sign In Now!
+                </h2>
 
-                    {/* Sign In Form */}
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-8">
-                            <label htmlFor="email" className="block text-lg mb-2">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                name="email"
-                                className="w-full bg-transparent border-b-2 border-white text-white placeholder-gray-300 focus:outline-none py-3"
-                                placeholder="Enter your email"
-                                required
-                            />
-                        </div>
-
-                        <div className="mb-8">
-                            <label htmlFor="password" className="block text-lg mb-2">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                name="password"
-                                className="w-full bg-transparent border-b-2 border-white text-white placeholder-gray-300 focus:outline-none py-3"
-                                placeholder="Enter your password"
-                                required
-                            />
-                        </div>
-
-
-
-                        <button
-                            type="submit"
-                            aria-label="Sign in to your account"
-                            className="w-full flex items-center justify-center gap-2 text-2xl font-semibold py-3 rounded-md bg-white text-[#4B0082] font-rancho transition duration-200 hover:bg-[#4B0082] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#4B0082] focus:ring-offset-2"
-                        >
-                            <PiSignInBold size={25} />
-                            Sign In
-                        </button>
-                    </form>
-
-
-                    {/* Divider */}
-                    <div className="flex items-center my-6">
-                        <div className="flex-grow h-px bg-white/30"></div>
-                        <span className="px-4 text-white text-2xl rancho">or</span>
-                        <div className="flex-grow h-px bg-white/30"></div>
+                {/* Sign In Form */}
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-8">
+                        <label htmlFor="email" className="block text-lg mb-2">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                            className="w-full bg-transparent border-b-2 border-white text-white placeholder-white/70 focus:outline-none focus:border-primary py-3 transition"
+                            placeholder="Enter your email"
+                            required
+                        />
                     </div>
 
-                    {/* Social Sign In Buttons */}
-                    <div className="space-y-4">
-                        <button
-                            onClick={handleGoogleSignin}
-                            className="w-full flex items-center justify-center gap-3 text-2xl rancho bg-white text-[#4B0082] font-semibold py-3 rounded-md hover:bg-[#4B0082] hover:text-white transition border border-white/30"
-                        >
-                            <FaGoogle size={25} />
-                            Continue with Google
-                        </button>
-
+                    <div className="mb-8">
+                        <label htmlFor="password" className="block text-lg mb-2">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            name="password"
+                            className="w-full bg-transparent border-b-2 border-white text-white placeholder-white/70 focus:outline-none focus:border-primary py-3 transition"
+                            placeholder="Enter your password"
+                            required
+                        />
                     </div>
 
-                    <p className="mt-8 text-center text-base">
-                        Don't have an account?{" "}
-                        <Link to={'/signup'} className="underline ">
-                            Sign Up
-                        </Link>
-                    </p>
+                    <button
+                        type="submit"
+                        aria-label="Sign in to your account"
+                        className="w-full flex items-center justify-center gap-2 text-2xl font-semibold py-3 rounded-md bg-white text-[#4B0082] font-rancho transition duration-200 hover:bg-[#4B0082] hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+                    >
+                        <PiSignInBold size={25} />
+                        Sign In
+                    </button>
+                </form>
 
+                {/* Divider */}
+                <div className="flex items-center my-6">
+                    <div className="flex-grow h-px bg-white/30"></div>
+                    <span className="px-4 text-white text-2xl font-rancho">or</span>
+                    <div className="flex-grow h-px bg-white/30"></div>
                 </div>
+
+                {/* Social Sign In */}
+                <div className="space-y-4">
+                    <button
+                        onClick={handleGoogleSignin}
+                        className="w-full flex items-center justify-center gap-3 text-2xl font-rancho bg-white text-[#4B0082] font-semibold py-3 rounded-md hover:bg-[#4B0082] hover:text-white transition border border-white/30"
+                    >
+                        <FaGoogle size={25} />
+                        Continue with Google
+                    </button>
+                </div>
+
+                <p className="mt-8 text-center text-base text-white/90">
+                    Don&apos;t have an account?{" "}
+                    <Link to="/signup" className="underline hover:text-white">
+                        Sign Up
+                    </Link>
+                </p>
             </div>
-        </>
+        </div>
     );
+
 };
 
 export default SignIn;
