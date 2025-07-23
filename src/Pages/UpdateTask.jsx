@@ -54,80 +54,90 @@ const UpdateTask = () => {
     return (
         <form
             onSubmit={handleUpdateTask}
-            className="max-w-lg mx-auto mt-10 p-8 rounded-xl backdrop-blur-md 
-                bg-[url('/assets/updateTask.jpg')] bg-cover bg-center bg-no-repeat 
-                border border-white/20 shadow-xl transition-all duration-300 hover:shadow-2xl"
+            className="max-w-2xl mx-auto mt-12 p-10 rounded-3xl backdrop-blur-xl 
+            bg-[url('/assets/updateTask.jpg')] bg-cover bg-center bg-no-repeat 
+            border border-primary/20 shadow-2xl hover:shadow-primary transition duration-300"
         >
-            <h2 className="text-3xl font-semibold text-center text-white mb-6">Update Task</h2>
+            <h2 className="text-4xl font-extrabold text-center text-white mb-8 font-rancho tracking-wider">
+                ✏️ Update Your Task
+            </h2>
 
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col gap-5">
+                {/* Title */}
                 <input
                     type="text"
                     name="title"
-                    placeholder="Task Title"
                     required
                     defaultValue={task?.title}
-                    className="px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Task Title"
+                    className="input bg-white/20 text-white placeholder-white border-white/30 focus:outline-none focus:ring-2 focus:ring-primary"
                 />
 
+                {/* Category */}
                 <select
                     name="category"
                     required
                     defaultValue={task?.category}
-                    className="px-4 py-2 rounded-lg bg-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="select bg-white/20 text-white border-white/30 focus:outline-none focus:ring-2 focus:ring-primary"
                 >
-                    <option className="bg-gray-600" value="">Select Category</option>
-                    <option className="bg-gray-600" value="Web Development">Web Development</option>
-                    <option className="bg-gray-600" value="Design">Design</option>
-                    <option className="bg-gray-600" value="Writing">Writing</option>
-                    <option className="bg-gray-600" value="Marketing">Marketing</option>
+                    <option disabled value="">Select Category</option>
+                    <option className="bg-base-300" value="Web Development">Web Development</option>
+                    <option className="bg-base-300" value="Design">Design</option>
+                    <option className="bg-base-300" value="Writing">Writing</option>
+                    <option className="bg-base-300" value="Marketing">Marketing</option>
                 </select>
 
+                {/* Description */}
                 <textarea
                     name="description"
-                    placeholder="Description"
+                    rows="4"
                     required
-                    rows="3"
                     defaultValue={task?.description}
-                    className="px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Task Description"
+                    className="textarea bg-white/20 text-white placeholder-white border-white/30 focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                 />
 
-                <input
-                    type="date"
-                    name="deadline"
-                    required
-                    defaultValue={task?.deadline}
-                    className="px-4 py-2 rounded-lg bg-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+                {/* Deadline & Budget */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                        type="date"
+                        name="deadline"
+                        required
+                        defaultValue={task?.deadline}
+                        className="input bg-white/20 text-white border-white/30 focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <input
+                        type="number"
+                        name="budget"
+                        required
+                        defaultValue={task?.budget}
+                        placeholder="Budget"
+                        className="input bg-white/20 text-white placeholder-white border-white/30 focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                </div>
 
-                <input
-                    type="number"
-                    name="budget"
-                    placeholder="Budget"
-                    required
-                    defaultValue={task?.budget}
-                    className="px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-
+                {/* Email (Disabled) */}
                 <input
                     type="email"
                     value={user?.email || "no email"}
                     disabled
-                    className="px-4 py-2 rounded-lg bg-white/10 text-white cursor-not-allowed"
+                    className="input bg-white/10 text-white cursor-not-allowed border border-white/20"
                 />
 
+                {/* Name (Disabled) */}
                 <input
                     type="text"
-                    value={user?.displayName || "beluga"}
+                    value={user?.displayName || "Beluga"}
                     disabled
-                    className="px-4 py-2 rounded-lg bg-white/10 text-white cursor-not-allowed"
+                    className="input bg-white/10 text-white cursor-not-allowed border border-white/20"
                 />
 
+                {/* Submit Button */}
                 <button
                     type="submit"
-                    className="bg-[#4B0082] btn text-2xl text-white font-semibold py-2 rounded-lg transition duration-200"
+                    className="btn bg-primary hover:bg-primary-focus text-white text-xl font-semibold rounded-lg mt-2"
                 >
-                    Update Task
+                    ✅ Update Task
                 </button>
             </div>
         </form>
