@@ -37,8 +37,8 @@ const MyApplicationList = ({ myApplicationPromise }) => {
 
     return (
         <div className="max-w-5xl mx-auto">
-            <h2 className="text-xl font-semibold text-center text-purple-700 mb-6">
-                You have applied for {applications.length} task{applications.length !== 1 && "s"}
+            <h2 className="text-2xl font-bold text-center text-primary mb-8 font-rancho tracking-wide">
+                🎯 You have applied for {applications.length} task{applications.length !== 1 && "s"}
             </h2>
 
             {applications.length > 0 ? (
@@ -46,14 +46,17 @@ const MyApplicationList = ({ myApplicationPromise }) => {
                     {applications.map((application) => (
                         <li
                             key={application._id}
-                            className="bg-white shadow-lg hover:shadow-xl transition duration-300 rounded-xl p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border border-purple-200"
+                            className="bg-base-100 border border-primary/20 shadow-md hover:shadow-xl transition duration-300 rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
                         >
+                            {/* Left Side: Info */}
                             <div className="flex-1">
-                                <h3 className="text-xl font-bold text-purple-800">{application.jobTitle}</h3>
-                                <p className="text-sm text-gray-700 mt-2">
+                                <h3 className="text-xl font-semibold text-primary">
+                                    {application.jobTitle}
+                                </h3>
+                                <p className="text-sm text-base-content/70 mt-2">
                                     <span className="font-medium">Reason:</span> {application.reason}
                                 </p>
-                                <p className="text-sm text-gray-500 mt-1">
+                                <p className="text-sm text-base-content/60 mt-1">
                                     <span className="font-medium">Applied on:</span>{" "}
                                     {new Date(application.appliedAt).toLocaleDateString("en-US", {
                                         year: "numeric",
@@ -63,10 +66,11 @@ const MyApplicationList = ({ myApplicationPromise }) => {
                                 </p>
                             </div>
 
+                            {/* Right Side: Actions */}
                             <div className="flex gap-4">
                                 <Link
                                     to={`/taskDetails/${application.taskId}`}
-                                    className="text-indigo-600 hover:text-indigo-800 transition transform hover:scale-110"
+                                    className="text-primary hover:text-primary-focus transition transform hover:scale-110"
                                     title="View Task Details"
                                 >
                                     <FaInfoCircle size={22} />
@@ -74,7 +78,7 @@ const MyApplicationList = ({ myApplicationPromise }) => {
 
                                 <button
                                     onClick={() => handleDelete(application._id)}
-                                    className="text-red-500 hover:text-red-700 transition transform hover:scale-110"
+                                    className="text-error hover:text-red-700 transition transform hover:scale-110"
                                     title="Delete Application"
                                 >
                                     <MdDeleteForever size={26} />
@@ -84,8 +88,8 @@ const MyApplicationList = ({ myApplicationPromise }) => {
                     ))}
                 </ul>
             ) : (
-                <div className="text-center mt-20 bg-white p-8 rounded-xl shadow">
-                    <p className="text-gray-600 text-xl">😔 You haven’t applied to any tasks yet.</p>
+                <div className="text-center mt-20 bg-base-100 border border-primary/10 p-10 rounded-2xl shadow">
+                    <p className="text-base-content/60 text-xl">😔 You haven’t applied to any tasks yet.</p>
                 </div>
             )}
         </div>
