@@ -40,16 +40,16 @@ const FeaturedTasks = () => {
     };
 
     return (
-        <div className="bg-[#f0f4f8] py-10 px-4">
+        <div className="bg-base-200 py-10 px-4">
             <div className="max-w-6xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-8 text-[#4B0082]">Featured Tasks</h2>
+                <h2 className="text-3xl font-bold text-center mb-8 text-primary">Featured Tasks</h2>
 
                 {loading ? (
                     <div className="flex justify-center items-center h-40">
-                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#4B0082]"></div>
+                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
                     </div>
                 ) : error ? (
-                    <div className="text-center text-red-500">
+                    <div className="text-center text-error">
                         <p>{error}</p>
                         <p>Please try again later</p>
                     </div>
@@ -58,36 +58,38 @@ const FeaturedTasks = () => {
                         {tasks.map((task) => (
                             <div
                                 key={task._id}
-                                className="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
+                                className="bg-base-100 rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
                             >
                                 <div className="p-5">
                                     <div className="flex justify-between items-start mb-3">
-                                        <span className="bg-purple-100 text-[#4B0082] text-xs font-semibold px-2.5 py-0.5 rounded">
+                                        <span className="bg-primary/10 text-primary text-xs font-semibold px-2.5 py-0.5 rounded">
                                             {task.category}
                                         </span>
-                                        <span className="text-sm text-gray-500">
+                                        <span className="text-sm text-base-content opacity-60">
                                             Due: {formatDate(task.deadline)}
                                         </span>
                                     </div>
 
-                                    <h3 className="text-xl font-bold text-gray-800 mb-2">{task.title}</h3>
+                                    <h3 className="text-xl font-bold text-base-content mb-2">
+                                        {task.title}
+                                    </h3>
 
-                                    <p className="text-gray-600 mb-4 line-clamp-2">
+                                    <p className="text-base-content opacity-70 mb-4 line-clamp-2">
                                         {task.description}
                                     </p>
 
                                     <div className="flex justify-between items-center">
-                                        <div className="text-sm text-gray-500">
+                                        <div className="text-sm text-base-content opacity-70">
                                             <p>Posted by: {task.name}</p>
                                         </div>
-                                        <div className="font-bold text-[#4B0082]">
+                                        <div className="font-bold text-primary">
                                             ${task.budget}
                                         </div>
                                     </div>
 
                                     <Link
                                         to={`/taskDetails/${task._id}`}
-                                        className="mt-4 block w-full bg-[#4B0082] text-white text-center py-2 rounded-md hover:bg-purple-900 transition"
+                                        className="mt-4 block w-full bg-primary text-white text-center py-2 rounded-md hover:bg-primary-focus transition"
                                     >
                                         View Details
                                     </Link>
@@ -99,22 +101,22 @@ const FeaturedTasks = () => {
 
                 {!loading && !error && tasks.length === 0 && (
                     <div className="text-center py-10">
-                        <p className="text-gray-500 text-lg">No tasks available at the moment</p>
+                        <p className="text-base-content opacity-60 text-lg">No tasks available at the moment</p>
                     </div>
                 )}
 
                 <div className="text-center mt-8">
                     <Link
                         to="/browseTasks"
-                        className="bg-[#4B0082] text-white px-6 py-2 rounded-md hover:bg-purple-900 transition"
+                        className="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary-focus transition"
                     >
                         View All Tasks
                     </Link>
                 </div>
-
             </div>
         </div>
     );
+
 };
 
 export default FeaturedTasks;
