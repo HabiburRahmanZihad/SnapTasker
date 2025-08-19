@@ -1,3 +1,4 @@
+import FAQ from "./FAQ";
 import FeaturedTasks from "./FeaturedTasks";
 import FeaturesSection from "./FeaturesSection";
 import Hero from "./Hero";
@@ -12,6 +13,7 @@ const Home = () => {
             <FeaturesSection></FeaturesSection>
             <SnapTaskerFeatures></SnapTaskerFeatures>
             <Team></Team>
+            <FAQ></FAQ>
         </div>
     );
 };
