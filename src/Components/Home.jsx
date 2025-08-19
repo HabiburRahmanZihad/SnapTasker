@@ -1,3 +1,4 @@
+import CallToAction from "./CallToAction";
 import FAQ from "./FAQ";
 import FeaturedTasks from "./FeaturedTasks";
 import FeaturesSection from "./FeaturesSection";
@@ -12,8 +13,9 @@ const Home = () => {
             <FeaturedTasks></FeaturedTasks>
             <FeaturesSection></FeaturesSection>
             <SnapTaskerFeatures></SnapTaskerFeatures>
-            <Team></Team>
             <FAQ></FAQ>
+            <Team></Team>
+            <CallToAction></CallToAction>
         </div>
     );
 };
